@@ -1,5 +1,3 @@
 var env = process.env.NODE_ENV;
 
-parseResponse
-
-parse
+module.exports = require('./lib/roboto');
