@@ -30,8 +30,6 @@ terms of service, you do so at your own risk.
 Here's an example of roboto being used to crawl a fictitious news site:
 
 ```js
-var newsbot = roboto();
-
 var fooCrawler = new roboto.Crawler({
   id: 'foo',
   start_urls: [
@@ -42,9 +40,10 @@ var fooCrawler = new roboto.Crawler({
   ]
 });
 
-fooCrawler.pipeline(itemLogger);
-
-newsbot.addCrawler('foo', fooCrawler);
+fooCrawler.on('parsedItem', function(item){
+  console.log(JSON.stringify(item));
+});
+fooCrawler.crawl();
 ```
 
 To launch the crawler, you can use the command line `roboto` utility:
