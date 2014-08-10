@@ -1,0 +1,21 @@
+Allow backbone style inheritance of base crawlers
+
+A proper unix daemon manager.
+- Accept signals
+- Logging
+- pidfile 
+
+- A built-in cache would be nice.
+- Easy built in storage middleware
+- Control parallelization.
+- robots.txt adherence
+  - Name and bot info in request header
+- Issue HEAD first
+
+Command Launcher
+- Generate new crawlers
+- Repl like scrapy shell command.
+- simple parse like scrapy parse
+- full on crawl launcher that outputs to stdout
+
+- Make it possible to over-ride url normalizer with middleware.
