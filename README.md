@@ -90,9 +90,5 @@ Some examples of pipeline middleware include:
   - Writing parsed items to a search index.
 
 ## FAQ
-
 Q: Really?
 A: Yes.
-=======
-roboto
-======
