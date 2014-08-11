@@ -27,6 +27,8 @@
     "request": "~2.40.0",
     "async": "~0.9.0",
     "utils-merge": "~1.0.0",
-    "underscore": "~1.6.0"
+    "underscore": "~1.6.0",
+    "winston": "~0.7.3",
+    "log": "~1.4.0"
   }
 }
