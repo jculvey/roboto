@@ -30,6 +30,9 @@ terms of service, you do so at your own risk.
 Here's an example of roboto being used to crawl a fictitious news site:
 
 ```js
+var roboto = require('roboto');
+var html_strip = require('htmlstrip-native').html_strip;
+
 var fooCrawler = new roboto.Crawler({
   id: 'foo',
   start_urls: [
@@ -37,12 +40,27 @@ var fooCrawler = new roboto.Crawler({
   ],
   allowed_domains: [
     "foonews.com",
-  ]
+  ],
+  blacklist: [
+    /rss/,
+    /privacy/,
+    /accounts/,
+  ],
+  whitelist: [
+    /foo/,
+    /bar/,
+  ],
 });
 
-fooCrawler.on('parsedItem', function(item){
-  console.log(JSON.stringify(item));
+fooCrawler.parseField('title', function(response, $){
+  return $('head title').text();
 });
+
+fooCrawler.parseField('body', function(response, $){
+  var html = $('body').html();
+  return html_strip(html, stripOptions);
+});
+
 fooCrawler.crawl();
 ```
 
