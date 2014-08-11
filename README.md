@@ -74,7 +74,7 @@ fooCrawler.on('item', function(item){
 fooCrawler.crawl();
 ```
 
-## Downloader Middlewares (wip)
+## Downloaders
 
 These provide extensibility points in roboto's request/response handling.
 
@@ -82,6 +82,22 @@ Downloader middleware can be used to accomplish the following:
   - Filtering out requests to already seen urls.
   - Storing requests in a cache to avoid repeat visits across crawl sessions.
   - Use HTTP Authentication when making requests.
+
+### HTTP Authentication
+
+```js
+var roboto = require('roboto');
+var robotoHttpAuth = roboto.downloaders.httpAuth;
+
+// The options should be the auth hash mentioned here:
+//   https://github.com/mikeal/request#http-authentication
+httpAuthOptions = {
+  user: 'bob',
+  pass: 'secret'
+}
+myCrawler.downloader(robotoHttpAuth(httpAuthOptions));
+
+```
 
 ## Parser Middlewares (wip)
 

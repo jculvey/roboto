@@ -1,6 +1,6 @@
 {
   "name": "roboto",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A web crawler for Nodejs.",
   "main": "index.js",
   "scripts": {
