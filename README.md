@@ -58,25 +58,13 @@ fooCrawler.parseField('title', function(response, $){
 
 fooCrawler.parseField('body', function(response, $){
   var html = $('body').html();
-  return html_strip(html, stripOptions);
+  return html_strip(html);
 });
 
 fooCrawler.crawl();
 ```
 
-To launch the crawler, you can use the command line `roboto` utility:
-
-```bash
-  $ roboto crawl foo
-```
-
-or programatically, like so:
-
-```js
-newsbot.crawl('foo');
-```
-
-## Downloader Middlewares
+## Downloader Middlewares (wip)
 
 These provide extensibility points in roboto's request/response handling.
 
@@ -85,17 +73,16 @@ Downloader middleware can be used to accomplish the following:
   - Storing requests in a cache to avoid repeat visits across crawl sessions.
   - Use HTTP Authentication when making requests.
 
-## Parser Middlewares
+## Parser Middlewares (wip)
 
-These provide extensibility points in roboto's ndling.
+These provide extensibility points in roboto's handling.
 
 Downloader middleware can be used to accomplish the following:
   - Filtering out requests to already seen urls.
   - Storing requests in a cache to avoid repeat visits across crawl sessions.
   - Use HTTP Authentication when making requests.
 
-
-## Pipeline Middlewares
+## Pipeline Middlewares (wip)
 
 These provide extensibility points in roboto's item processing. By default,
 parsed items are written to stdout. If you want to do something more interesting 
