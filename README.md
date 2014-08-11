@@ -41,13 +41,34 @@ var fooCrawler = new roboto.Crawler({
   ],
 });
 
+// Add parsers to the crawler.
+// Each will parse a data item from the response
 fooCrawler.parseField('title', function(response, $){
   return $('head title').text();
 });
 
+// $ is a cherio selector loaded with the response body.
+// Use it like you would jquery.
+// See https://github.com/cheeriojs/cheerio for more info.
 fooCrawler.parseField('body', function(response, $){
   var html = $('body').html();
   return html_strip(html);
+});
+
+// response has a few attributes from 
+// http://nodejs.org/api/http.html#http_http_incomingmessage
+fooCrawler.parseField('url', function(response, $){
+  return response.url;
+});
+
+// Do something with the items you parse
+fooCrawler.on('item', function(item){
+  database.save(item);
+  // item = { 
+  //    title: 'Foo happened today!', 
+  //    body: 'It was amazing', 
+  //    url: http://www.foonews.com/latest 
+  // }
 });
 
 fooCrawler.crawl();
