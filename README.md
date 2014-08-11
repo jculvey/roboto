@@ -12,9 +12,7 @@ You can use roboto to create crawlers that do things like:
 ## Installation
 
 ```bash
-  $ npm install -g roboto
-  $ roboto /tmp/newsbot && cd /tmp/newsbot
-  $ npm install
+  $ npm install roboto
 ```
 
 ## Basic Usage 
