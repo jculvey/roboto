@@ -24,7 +24,6 @@ var roboto = require('roboto');
 var html_strip = require('htmlstrip-native').html_strip;
 
 var fooCrawler = new roboto.Crawler({
-  id: 'foo',
   start_urls: [
     "http://www.foonews.com/latest",
   ],
@@ -82,7 +81,3 @@ Some examples of pipeline middleware include:
   - Logging items to a file.
   - Storing parsed items in a database.
   - Writing parsed items to a search index.
-
-## FAQ
-Q: Really?
-A: Yes.
