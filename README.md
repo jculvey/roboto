@@ -1,13 +1,12 @@
 Roboto
 =====
 
-Roboto is a crawler for nodejs. 
-
-You can use roboto to create crawlers that do things like: 
+Roboto is a node.js crawler framework that you can use to do things like: 
   - crawl documents in an intranet for search indexing.
   - scrape a website for data aggregation.
   - crawl an app to check for broken links.
   - general purpose crawling of the web.
+  - much more!
 
 ## Installation
 
