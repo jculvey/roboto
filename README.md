@@ -99,16 +99,16 @@ myCrawler.downloader(robotoHttpAuth(httpAuthOptions));
 
 ```
 
-## Parser Middlewares (wip)
+## Link Extractors
 
-These provide extensibility points in roboto's handling.
+These provide extensibility points in roboto's link extraction.
 
 Downloader middleware can be used to accomplish the following:
   - Filtering out requests to already seen urls.
   - Storing requests in a cache to avoid repeat visits across crawl sessions.
   - Use HTTP Authentication when making requests.
 
-## Pipeline Middlewares (wip)
+## Pipelines
 
 These provide extensibility points in roboto's item processing. By default,
 parsed items are written to stdout. If you want to do something more interesting 
@@ -118,3 +118,28 @@ Some examples of pipeline middleware include:
   - Logging items to a file.
   - Storing parsed items in a database.
   - Writing parsed items to a search index.
+
+## Logging
+
+Logging is handled by [log.js](https://github.com/visionmedia/log.js), which
+is super light weight and very easy to use.
+
+You can access the logger from your crawler. The log level can be set
+in the options passed to the Crawler constructor.
+
+```js
+var myCrawler = new roboto.Crawler({
+  start_urls: [ "http://www.mysite.com" ],
+  logLevel: 'debug'
+});
+
+// Logging methods, by priority
+myCrawler.log.emergency('Something caught fire.');
+myCrawler.log.alert('Something catastrophic happened.');
+myCrawler.log.critical('Something terrible happened.');
+myCrawler.log.error('Something bad happened.');
+myCrawler.log.warning('Something alarming happened.');
+myCrawler.log.notice('Something noticeable happened.');
+myCrawler.log.info('Something happened.');
+myCrawler.log.debug('Something happened here.');
+```
