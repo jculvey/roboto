@@ -62,7 +62,7 @@ fooCrawler.parseField('url', function(response, $){
 });
 
 // Do something with the items you parse
-fooCrawler.on('item', function(item){
+fooCrawler.pipeline(function(item) {
   database.save(item);
   // item = { 
   //    title: 'Foo happened today!', 
@@ -111,13 +111,48 @@ Downloader middleware can be used to accomplish the following:
 ## Pipelines
 
 These provide extensibility points in roboto's item processing. By default,
-parsed items are written to stdout. If you want to do something more interesting 
-with your data, you'll need to use pipeline middlewares.
+parsed items are logged to stdout. To do something more useful with your data, 
+you'll want to use pipelines.
 
-Some examples of pipeline middleware include:
-  - Logging items to a file.
-  - Storing parsed items in a database.
-  - Writing parsed items to a search index.
+Pipleines can be added to your crawler like this:
+
+```js
+fooCrawler.pipeline(function(item) {
+  database.save(item);
+  // item = { 
+  //    title: 'Foo happened today!', 
+  //    body: 'It was amazing', 
+  //    url: http://www.foonews.com/latest 
+  // }
+});
+```
+
+Roboto provides some useful built-in pipelines.
+
+### Roboto-solr
+
+This can be used to write extracted items to a solr index.
+
+A `fieldMap` can be specified in the options of the constructor to
+change the key of an item as it is stored in solr.
+
+In the following example, the crawler is parsing a `'url'` field
+which should be stored in solr as `'id'`
+
+```js
+var robotoSolr = roboto.pipelines.robotoSolr({
+  host: '127.0.0.1',
+  port: '8983',
+  core: '/collection1', // if defined, should begin with a slash
+  path: '/solr', // should also begin with a slash
+  fieldMap: {
+    'url': 'id',
+    'body': 'content_t'
+  }
+});
+
+myCrawler.pipeline(robotoSolr);
+```
 
 ## Logging
 
