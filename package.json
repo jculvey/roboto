@@ -1,6 +1,6 @@
 {
   "name": "roboto",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A web crawler for Nodejs.",
   "main": "index.js",
   "scripts": {
@@ -32,6 +32,7 @@
     "underscore": "~1.6.0",
     "winston": "~0.7.3",
     "log": "~1.4.0",
-    "solr": "~0.2.2"
+    "solr": "~0.2.2",
+    "moment": "~2.8.1"
   }
 }
