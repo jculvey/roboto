@@ -2,11 +2,11 @@ Roboto
 =====
 
 Roboto is a node.js crawler framework that you can use to do things like: 
-  - crawl documents in an intranet for search indexing.
-  - scrape a website for data aggregation.
-  - crawl an app to check for broken links.
-  - general purpose crawling of the web.
-  - much more!
+  - Crawl documents in an intranet for search indexing.
+  - Scrape a website for data aggregation.
+  - Crawl an app to check for broken links.
+  - General purpose crawling of the web.
+  - Much more!
 
 ## Installation
 
@@ -177,3 +177,39 @@ myCrawler.log.notice('Something noticeable happened.');
 myCrawler.log.info('Something happened.');
 myCrawler.log.debug('Something happened here.');
 ```
+
+## Alternatives
+
+[Scrapy](http://doc.scrapy.org/en/latest/) is an awesome python framework for scraping/crawling. It's fairly
+mature and has a good feature set. It's a good option if your looking to do something like this in python. If 
+you're familiar with scrapy, many of roboto's concepts may seem familiar.
+
+A couple of annoyances led me to look for alternatives to scrapy:
+  - No handling for 'nofollow' out of the box
+  - Link extraction is overly complicated
+  - Bulky xml libraries
+  - My day job is a web developer, so I want jQuery like DOM manipulation. (you suck xpath)
+
+[Nutch](http://nutch.apache.org/) is a popular off the shelf crawler. It's mature and 
+full featured like Lucene and Solr. 
+
+Java and xml make me sad though :( 
+
+## Roadmap
+
+Currently planned features:
+  - Throttling
+  - More pipelines (.csv, elastic-search, etc)
+  - Built-in caching (alternative to a caching proxy like Squid).
+  - Full adherance to robots.txt standards.
+  - Site map handling.
+
+Feel free to create an issue if there's a feature you'd like to see or a bug you
+want fixed :)
+
+
+
+
+
+
+

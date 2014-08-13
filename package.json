@@ -1,6 +1,6 @@
 {
   "name": "roboto",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A web crawler for Nodejs.",
   "main": "index.js",
   "scripts": {
@@ -12,10 +12,12 @@
   },
   "keywords": [
     "crawler",
+    "crawling",
     "spider",
+    "scraping",
     "scraper",
     "robot",
-    "crawling"
+    "bot"
   ],
   "author": "jculvey",
   "license": "MIT",
