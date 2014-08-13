@@ -98,7 +98,7 @@ fooCrawler.pipeline(function(item) {
 
 Roboto provides some useful built-in pipelines.
 
-### Roboto-solr
+### roboto-solr
 
 This can be used to write extracted items to a solr index.
 
@@ -106,7 +106,7 @@ A `fieldMap` can be specified in the options of the constructor to
 change the key of an item as it is stored in solr.
 
 In the following example, the crawler is parsing a `'url'` field
-which should be stored in solr as `'id'`
+which will be stored in the solr index as `'id'`
 
 ```js
 var robotoSolr = roboto.pipelines.robotoSolr({
