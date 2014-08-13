@@ -73,45 +73,15 @@ fooCrawler.pipeline(function(item) {
 fooCrawler.crawl();
 ```
 
-## Downloaders
-
-These provide extensibility points in roboto's request/response handling.
-
-Downloader middleware can be used to accomplish the following:
-  - Filtering out requests to already seen urls.
-  - Storing requests in a cache to avoid repeat visits across crawl sessions.
-  - Use HTTP Authentication when making requests.
-
-### HTTP Authentication
-
-```js
-var roboto = require('roboto');
-var robotoHttpAuth = roboto.downloaders.httpAuth;
-
-// The options should be the auth hash mentioned here:
-//   https://github.com/mikeal/request#http-authentication
-httpAuthOptions = {
-  user: 'bob',
-  pass: 'secret'
-}
-myCrawler.downloader(robotoHttpAuth(httpAuthOptions));
-
-```
-
-## Link Extractors
-
-These provide extensibility points in roboto's link extraction.
-
-Downloader middleware can be used to accomplish the following:
-  - Filtering out requests to already seen urls.
-  - Storing requests in a cache to avoid repeat visits across crawl sessions.
-  - Use HTTP Authentication when making requests.
-
 ## Pipelines
 
-These provide extensibility points in roboto's item processing. By default,
-parsed items are logged to stdout. To do something more useful with your data, 
-you'll want to use pipelines.
+For each document roboto crawls, it creates an item. This item will be populated
+with fields parsed from the document with parser functions added via `crawler.parseField`.
+
+After a document has been parsed, a crawler's pipelines will be invoked in the order
+in which they were added.
+
+To do something more useful with your data, you'll want to use pipelines.
 
 Pipleines can be added to your crawler like this:
 
@@ -151,6 +121,73 @@ var robotoSolr = roboto.pipelines.robotoSolr({
 });
 
 myCrawler.pipeline(robotoSolr);
+```
+
+## Downloaders
+
+These provide extensibility points in roboto's request/response handling.
+
+Downloader middleware can be used to accomplish the following:
+  - Filtering out requests to already seen urls.
+  - Storing requests in a cache to avoid repeat visits across crawl sessions.
+  - Use HTTP Authentication when making requests.
+
+You can use a custom downloader by adding one via the `crawler.donwloader` function:
+
+```js
+
+myCrawler.downloader(function(href, requestHandler) {
+  var requestOptions = {
+    url: href,
+    headers: {
+        'X-foo': 'bar'
+    }
+  });
+
+  request(requestOptions, requestHandler);
+})
+```
+
+The signature of `requestHandler` should match that of the 
+(request callback)[https://github.com/mikeal/request#requestoptions-callback]
+mentioned here.
+
+### HTTP Authentication
+
+Roboto provides a built-in downloader for using http authentication in
+your crawl requests.
+
+```js
+var roboto = require('roboto');
+var robotoHttpAuth = roboto.downloaders.httpAuth;
+
+// The options should be the auth hash mentioned here:
+//   https://github.com/mikeal/request#http-authentication
+httpAuthOptions = {
+  user: 'bob',
+  pass: 'secret'
+}
+myCrawler.downloader(robotoHttpAuth(httpAuthOptions));
+
+```
+
+## Link Extraction
+
+By default, roboto will extract all links from a page and add them
+onto the queue of pages to be crawled unless they:
+
+ - Don't contain an `href` attribute.
+ - Has `rel="nofollow"` or `rel="noindex"`.
+ - Doesn't belong to a domain listed in the crawler's `allowedDomains` list.
+ - Matches a rule on the crawlers `blacklist`.
+ - Doesn't matches a rule on the crawlers `whitelist`.
+ - Has already been crawled
+
+Also, pages will not be processed if the page's `<head>` contains a tag like:
+
+```html
+  <meta name="robots">nofollow</meta>
+
 ```
 
 ## Logging
