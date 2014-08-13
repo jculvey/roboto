@@ -125,11 +125,9 @@ myCrawler.pipeline(robotoSolr);
 
 ## Downloaders
 
-These provide extensibility points in roboto's request/response handling.
-
-Downloader middleware can be used to accomplish the following:
-  - Filtering out requests to already seen urls.
-  - Storing requests in a cache to avoid repeat visits across crawl sessions.
+The default downloader can be over-ridden with something custom. For example, you can
+use a custom downloader to:
+  - Cache requests to avoid repeat visits across crawl sessions.
   - Use HTTP Authentication when making requests.
 
 You can use a custom downloader by adding one via the `crawler.donwloader` function:
@@ -149,7 +147,7 @@ myCrawler.downloader(function(href, requestHandler) {
 ```
 
 The signature of `requestHandler` should match that of the 
-(request callback)[https://github.com/mikeal/request#requestoptions-callback]
+[request callback](https://github.com/mikeal/request#requestoptions-callback)
 mentioned here.
 
 ### HTTP Authentication
@@ -177,11 +175,11 @@ By default, roboto will extract all links from a page and add them
 onto the queue of pages to be crawled unless they:
 
  - Don't contain an `href` attribute.
- - Has `rel="nofollow"` or `rel="noindex"`.
- - Doesn't belong to a domain listed in the crawler's `allowedDomains` list.
- - Matches a rule on the crawlers `blacklist`.
- - Doesn't matches a rule on the crawlers `whitelist`.
- - Has already been crawled
+ - Have `rel="nofollow"` or `rel="noindex"`.
+ - Don't belong to a domain listed in the crawler's `allowedDomains` list.
+ - Match a rule on the crawler's `blacklist`.
+ - Don't match a rule on the crawler's `whitelist`.
+ - Have already been crawled
 
 Also, pages will not be processed if the page's `<head>` contains a tag like:
 
