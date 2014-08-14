@@ -169,6 +169,18 @@ myCrawler.downloader(robotoHttpAuth(httpAuthOptions));
 
 ```
 
+## Url Normalization
+
+Also known as [URL canonicalization](http://en.wikipedia.org/wiki/URL_normalization)
+
+This is the process of reducing syntactically different urls to a common simplified
+form. This is useful while crawling to ensure that multiple urls that point to the
+same page don't get crawled more than once.
+
+By default roboto normalizes urls with the following procedure:
+
+  - Unescaping url encoding  `%7Eexample => ~example`
+
 ## Link Extraction
 
 By default, roboto will extract all links from a page and add them
