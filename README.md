@@ -179,7 +179,28 @@ same page don't get crawled more than once.
 
 By default roboto normalizes urls with the following procedure:
 
-  - Unescaping url encoding  `%7Eexample => ~example`
+  - Unescaping url encoding  `/foo/%7Eexample => /foo/~example`
+  - Converting relative urls to absolute  `/foo.html => http://example.com/bar.html`
+  - Fully resolving paths  `/foo/../bar/baz.html => /bar/baz.html`
+  - Discarding fragments  `/foo.html#bar => /foo.html`
+  - Discarding query params  `/foo.html#bar => /foo.html`
+  - Discarding directory indexes  `/foo/index.html => /foo`
+    - index.html, index.php, default.asp, default.aspx are all discarded.
+  - Removing mutliple occurrences of '/'  `/foo//bar///baz => /foo/bar/baz`
+  - Removing trailing '/'  `/foo/bar/ => /foo/bar`
+
+Discarding query params all together isn't optimal. A planned enhancement is to
+sort query params, and possibly detect safe params to remove (sort, rows, etc.).
+
+Like many other aspects of roboto, the default normalization routine is easy to 
+over-ride.
+
+```js
+myCrawler.normalizeUrl = function(link, response) {
+  var normalizedUrl = specialNormalize(link);
+  return normalizedUrl;
+}
+```
 
 ## Link Extraction
 
