@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <title>Foo News homepage</title>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+  <meta http-equiv="last-modified" content="2014-08-14T00:01:51Z"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="robots" content="index,follow"/>
+  <meta name="description" content="Foo News tells it how it is"/>
+  <meta name="keywords" content="Foo,News,Bar,Awesomenss"/>
+  <link href="http://www.foonews.com/" rel="canonical"/>
+  <link href="http://rss.foonews.com/rss/topstories.rss" rel="alternate" title="Foo News top stories" type="application/rss+xml"/>
+  <link href="http://mexico.foonews.com" hreflang="es" rel="alternate" title="Foo News Mexico" type="text/html"/>
+  <script>
+    window.foo = 'bar';
+  </script>
+</head>
+<body>
+  <div id="navigation">
+    <ul>
+      <li> <a href="/stories/page1.html"><span>Foo</span></a> </li>
+      <li> <a href="/stories/page2.html"><span>Bar</span></a> </li>
+      <li> <a href="/archives/index.html" rel="nofollow"><span>Archives</span></a> </li>
+      <!-- Used for testing blacklist -->
+      <li> <a href="/accounts/login.html"><span>Login</span></a> </li>
+    </ul>
+  </div>
+  <div id="content">
+    <h1>Just In</h1>
+    <p>The world is apparently falling apart.</p>
+      <!-- Used for testing disallowed domain -->
+    <p>More <a href="http://www.badnews.com/stories/foo.html"><span>Here</span></a> </p>
+  </div>
+  <div id="sidebar">
+    <h3>Top Headlines</h3>
+    <ul>
+      <li> <a href="/stories/page1.html?foo=bar"><span>Story 1</span></a> </li>
+      <li> <a href="/stories/page2.html?foo=bar"><span>Story 2</span></a> </li>
+    </ul>
+  </div>
+</body>
+</html>

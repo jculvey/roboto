@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <title>Page 2</title>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+  <meta http-equiv="last-modified" content="2014-08-14T00:01:51Z"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <script>
+    window.foo = 'bar';
+  </script>
+</head>
+<body>
+  <div id="navigation">
+    <ul>
+      <li> <a href="/stories/page1.html"><span>Foo</span></a> </li>
+      <li> <a href="/stories/page2.html"><span>Bar</span></a> </li>
+    </ul>
+  </div>
+  <div id="content">
+    <h1>Page 2 News</h1>
+    <p>Things are looking up</p>
+  </div>
+  <div id="sidebar">
+    <h3>Top Headlines</h3>
+    <ul>
+      <li> <a href="/stories/page1.html?foo=bar"><span>Story 1</span></a> </li>
+      <li> <a href="/stories/page2.html?foo=bar"><span>Story 2</span></a> </li>
+      <li> <a href="/stories/page3.html?foo=bar"><span>Story 3</span></a> </li>
+
+      <!-- Verifies different ordering of query params doesn't dupe urls-->
+      <li> <a href="/stories/page1.html?baz=quux&foo=bar"><span>Story 3</span></a> </li>
+
+      <!-- Verifies that fragments get discarded-->
+      <li> <a href="/stories/page1.html#foo"><span>Story 3</span></a> </li>
+
+    </ul>
+  </div>
+</body>
+</html>
