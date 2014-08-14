@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "htmlstrip-native": "0.0.2",
-    "express": "~4.8.3"
+    "express": "~4.8.3",
+    "robots.txt": "~1.0.0"
   }
 }

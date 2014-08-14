@@ -6,9 +6,6 @@ var testCrawler = new roboto.Crawler({
   allowedDomains: [
     'localhost'
   ],
-  startUrls: [
-    'http://localhost:30045/stories/index.html',
-  ],
   blacklist: [
     /accounts/,
   ]

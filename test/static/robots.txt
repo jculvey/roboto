@@ -1,0 +1,4 @@
+Sitemap: http://localhost:9999/static/sitemap.xml
+User-agent: *
+Disallow: /search
+Disallow: /ads
