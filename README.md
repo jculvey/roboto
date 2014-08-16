@@ -38,6 +38,7 @@ var fooCrawler = new roboto.Crawler({
     /foo/,
     /bar/,
   ],
+  requestDelay: 10 // delay between requests in ms, defaults to 0
 });
 
 // Add parsers to the crawler.

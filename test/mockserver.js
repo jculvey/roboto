@@ -1,11 +1,6 @@
 var express = require('express');
 var robots = require('robots.txt')
 
-var app = express();
-
-app.use(robots(__dirname + '/static/robots.txt'))
-app.use('/stories', express.static(__dirname + '/static/stories'));
-app.use('/static', express.static(__dirname + '/static'));
 
 //app.get('/timeout', function(req, res){
   //setTimeout(function() {
@@ -13,8 +8,15 @@ app.use('/static', express.static(__dirname + '/static'));
   //},req.param("timeout") || 0);
 //});
 
-exports.app = app;
+exports.createServer = function createServer(port) {
+  var app = express();
 
-if (require.main === module) {
-  app.listen(9090);
-}
+  app.use(robots(__dirname + '/static/robots.txt'))
+  app.use('/stories', express.static(__dirname + '/static/stories'));
+  app.use('/static', express.static(__dirname + '/static'));
+  return app.listen(port);
+};
+
+//if (require.main === module) {
+  //app.listen(9090);
+//}
