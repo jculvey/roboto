@@ -3,25 +3,19 @@ var moment = require("moment");
 var roboto = require('../lib/roboto');
 var Log = require('log');
 
+var fixtures = require('./fixtures');
 var mockserver = null;
+var testCrawler = null;
 
 describe('Request', function(){
   before(function() {
     mockserver = require('./mockserver').createServer(9999);
+    testCrawler = fixtures.delayCrawler();
   });
   after(function() {
+    delete testCrawler;
     mockserver.close();
   });
-
-  var log = new Log('critical');
-  var testCrawler = new roboto.Crawler({
-    requestDelay: 40,
-    allowedDomains: [ 'localhost' ],
-    startUrls: [
-      'http://localhost:9999/static/delay/index.html',
-    ]
-  });
-  testCrawler.log = log;
 
   describe('Request Delay', function(){
     this.timeout(10000);

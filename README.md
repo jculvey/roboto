@@ -163,8 +163,11 @@ var robotoHttpAuth = roboto.downloaders.httpAuth;
 // The options should be the auth hash mentioned here:
 //   https://github.com/mikeal/request#http-authentication
 httpAuthOptions = {
-  user: 'bob',
-  pass: 'secret'
+  rejectUnauthorized: true, // defaults to false
+  auth: {
+    user: 'bob',
+    pass: 'secret'
+  }
 }
 myCrawler.downloader(robotoHttpAuth(httpAuthOptions));
 
