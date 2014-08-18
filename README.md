@@ -212,11 +212,10 @@ By default, roboto will obey directives contained in a domain's `robots.txt` fil
 are parsed [as outlined here](https://developers.google.com/webmasters/control-crawl-index/docs/robots_txt).
 
 Before roboto crawls an url, it will fetch the domain's `robots.txt` file, parse the directives,
-and skip crawling the url if a directive disallows crawling. The fetched `robots.txt` file is 
+and skip crawling the url if a directive disallows it. The fetched `robots.txt` file is 
 is then cached.
 
-At this time, roboto doesn't examine the robots.txt file of subdomains (only the `robots.txt` file
-located at the top level domain).
+At this time, roboto doesn't examine the `robots.txt` file of subdomains (only the one located at the top level domain).
 
 ## Link Extraction
 
