@@ -1,4 +1,20 @@
 Sitemap: http://localhost:9999/static/sitemap.xml
-User-agent: *
+
+User-agent: Googlebot
+Disallow: /ajax/
+Disallow: /sharer/
+
+User-agent: roboto-test
+# Disallow: *  // Test that comments don't break robots parser
 Disallow: /search
 Disallow: /ads
+Disallow: /foo/bar.html
+
+Allow: /folder/
+Disallow: /folder
+
+Disallow: /fish
+Disallow: /fish/
+
+User-agent: roboto
+Allow: *

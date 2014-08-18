@@ -206,6 +206,17 @@ myCrawler.normalizeUrl = function(link, response) {
 }
 ```
 
+## robots.txt
+
+By default, roboto will obey directives contained in a domain's `robots.txt` file.
+
+Before roboto crawls an url, it will fetch the domain's `robots.txt` file, parse the directives,
+and skip crawling the url if a directive disallows crawling. The fetched `robots.txt` file is 
+is then cached.
+
+At this time, roboto doesn't examine the robots.txt file of subdomains (only the `robots.txt` file
+located at the top level domain).
+
 ## Link Extraction
 
 By default, roboto will extract all links from a page and add them
@@ -273,7 +284,6 @@ Currently planned features:
   - Throttling
   - More pipelines (.csv, elastic-search, etc)
   - Built-in caching (alternative to a caching proxy like Squid).
-  - Full adherance to robots.txt standards.
   - Site map handling.
 
 Feel free to create an issue if there's a feature you'd like to see or a bug you
