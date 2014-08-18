@@ -208,7 +208,8 @@ myCrawler.normalizeUrl = function(link, response) {
 
 ## robots.txt
 
-By default, roboto will obey directives contained in a domain's `robots.txt` file.
+By default, roboto will obey directives contained in a domain's `robots.txt` file. Directives
+are parsed [as outlined here](https://developers.google.com/webmasters/control-crawl-index/docs/robots_txt).
 
 Before roboto crawls an url, it will fetch the domain's `robots.txt` file, parse the directives,
 and skip crawling the url if a directive disallows crawling. The fetched `robots.txt` file is 
