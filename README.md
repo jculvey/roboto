@@ -211,11 +211,27 @@ myCrawler.normalizeUrl = function(link, response) {
 By default, roboto will obey directives contained in a domain's `robots.txt` file. Directives
 are parsed [as outlined here](https://developers.google.com/webmasters/control-crawl-index/docs/robots_txt).
 
+If the `robots.txt` file specifies a `Crawl-Delay` directive, that will be given precedence over the
+`requestDelay` option passed to the crawler constructor.
+
+You can set the option `obeyRobotsTxt` to `false` in the constructor to disregard the rules in `robots.txt` files:
+
+```js
+var fooCrawler = new roboto.Crawler({
+  start_urls: [
+    "http://www.foonews.com/latest",
+  ],
+  obeyRobotsTxt: false
+});
+```
+
 Before roboto crawls an url, it will fetch the domain's `robots.txt` file, parse the directives,
 and skip crawling the url if a directive disallows it. The fetched `robots.txt` file is 
 is then cached.
 
-At this time, roboto doesn't examine the `robots.txt` file of subdomains (only the one located at the top level domain).
+Note that roboto will fetch the robots.txt of subdomains. For example, when crawling `http://news.ycombinator.com`,
+`http://news.ycombinator.com/robots.txt` will be fetched, not `http://ycombinator.com/robots.txt`.
+
 
 ## Link Extraction
 
@@ -276,12 +292,9 @@ A couple of annoyances led me to look for alternatives to scrapy:
 [Nutch](http://nutch.apache.org/) is a popular off the shelf crawler. It's mature and 
 full featured like Lucene and Solr. 
 
-Java and xml make me sad though :( 
-
 ## Roadmap
 
 Currently planned features:
-  - Throttling
   - More pipelines (.csv, elastic-search, etc)
   - Built-in caching (alternative to a caching proxy like Squid).
   - Site map handling.

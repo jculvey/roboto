@@ -8,7 +8,7 @@ var BotParser = require('../lib/robotsParser');
 var botParser = new BotParser({ userAgent: 'roboto-test' });
 botParser._fetchRobotsFile = function(domain, done) {
   fs.readFile(__dirname + '/static/robots.txt', 'utf8', function (err, data) {
-    done(data);
+    done(200, data);
   });
 };
 
@@ -21,12 +21,12 @@ describe('Robots Parser', function(){
       'http://localhost:9999/',
       'http://localhost:9999/foo.html',
       'http://localhost:9999/ajax/foo',
-      'http://example.com/folder/page',
-      'http://example.com/page',
-      'http://example.com/Fish.asp',
-      'http://example.com/catfish',
-      'http://example.com/?id=fish',
-      'http://example.com/Fish/Salmon.asp',
+      'http://localhost:9999/folder/page',
+      'http://localhost:9999/page',
+      'http://localhost:9999/Fish.asp',
+      'http://localhost:9999/catfish',
+      'http://localhost:9999/?id=fish',
+      'http://localhost:9999/Fish/Salmon.asp',
     ];
 
     // None of the test urls should be filtered
@@ -41,15 +41,15 @@ describe('Robots Parser', function(){
       'http://localhost:9999/foo/bar.html',
       'http://localhost:9999/search?q=foo+bar+baz&fq=quux',
       'http://localhost:9999/ads/foo',
-      'http://example.com/fish',
-      'http://example.com/fish.html',
-      'http://example.com/fish/salmon.html',
-      'http://example.com/fishheads',
-      'http://example.com/fishheads/yummy.html',
-      'http://example.com/fish.php?id=anything',
-      'http://example.com/fish/',
-      'http://example.com/fish/?id=anything',
-      'http://example.com/fish/salmon.htm',
+      'http://localhost:9999/fish',
+      'http://localhost:9999/fish.html',
+      'http://localhost:9999/fish/salmon.html',
+      'http://localhost:9999/fishheads',
+      'http://localhost:9999/fishheads/yummy.html',
+      'http://localhost:9999/fish.php?id=anything',
+      'http://localhost:9999/fish/',
+      'http://localhost:9999/fish/?id=anything',
+      'http://localhost:9999/fish/salmon.htm',
     ];
 
     // All of the test urls should be filtered
