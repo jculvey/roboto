@@ -87,15 +87,26 @@ To do something more useful with your data, you'll want to use pipelines.
 Pipleines can be added to your crawler like this:
 
 ```js
-fooCrawler.pipeline(function(item) {
-  database.save(item);
+fooCrawler.pipeline(function(item, callback) {
   // item = { 
   //    title: 'Foo happened today!', 
   //    body: 'It was amazing', 
   //    url: http://www.foonews.com/latest 
   // }
+
+  database.save(item, function(err) {
+    if(err) {
+      callback(err);
+    }
+    callback();
+  });
+
 });
 ```
+
+The signature of a pipeline function is `function(item, callback)`.  The `callback`
+function takes a single argument `err` which should be supplied if an error was encountered. Otherwise,
+it should be invoked with no arguments `callback()`.
 
 Roboto provides some useful built-in pipelines.
 
