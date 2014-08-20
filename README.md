@@ -26,15 +26,15 @@ var fooCrawler = new roboto.Crawler({
   start_urls: [
     "http://www.foonews.com/latest",
   ],
-  allowed_domains: [
+  allowed_domains: [ // optional
     "foonews.com",
   ],
-  blacklist: [
+  blacklist: [ // optional
     /rss/,
     /privacy/,
     /accounts/,
   ],
-  whitelist: [
+  whitelist: [ // optional
     /foo/,
     /bar/,
   ],
