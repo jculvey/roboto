@@ -62,13 +62,20 @@ fooCrawler.parseField('url', function(response, $){
 });
 
 // Do something with the items you parse
-fooCrawler.pipeline(function(item) {
-  database.save(item);
+fooCrawler.pipeline(function(item, callback) {
   // item = { 
   //    title: 'Foo happened today!', 
   //    body: 'It was amazing', 
   //    url: http://www.foonews.com/latest 
   // }
+
+  database.save(item, function(err) {
+    if(err) {
+      callback(err);
+    }
+    callback();
+  });
+
 });
 
 fooCrawler.crawl();
@@ -88,20 +95,22 @@ Pipleines can be added to your crawler like this:
 
 ```js
 fooCrawler.pipeline(function(item, callback) {
-  // item = { 
-  //    title: 'Foo happened today!', 
-  //    body: 'It was amazing', 
-  //    url: http://www.foonews.com/latest 
-  // }
-
   database.save(item, function(err) {
     if(err) {
       callback(err);
     }
     callback();
   });
-
 });
+
+// Probably not a wise idea, but for the purpose of illustration:
+fooCrawler.pipeline(function(item, callback) {
+  fs.writeFile(item.filename, item.body, function (err) {
+    if (err) callback(err);
+    callback();
+  });
+});
+
 ```
 
 The signature of a pipeline function is `function(item, callback)`.  The `callback`
