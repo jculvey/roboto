@@ -9,18 +9,17 @@ var crawler = null;
 process.env['NODE_ENV'] = 'test';
 
 describe('Happy Path', function(){
-  before(function() {
+  beforeEach(function() {
     mockserver = require('./mockserver').createServer(9999);
     crawler = fixtures.storiesCrawler();
   });
 
-  after(function() {
+  afterEach(function() {
     delete crawler;
     mockserver.close();
   });
 
   it('should crawl things', function(done){
-
     crawler.once('finish', function(){
       var stats = crawler.stats;
       assert.equal(stats.pagesCrawled, 3);
@@ -43,27 +42,26 @@ describe('Happy Path', function(){
     crawler.crawl();
   })
 
-  //it('should produce items', function(done){
-    //crawler.parseField('url', function(response) {
-      //return response.url;
-    //});
+  it('should produce items', function(done){
+    crawler.parseField('url', function(response) {
+      return response.url;
+    });
 
-    //var items = [];
-    //crawler.pipeline(function(item, cb){
-      //debugger;
-      //items.push(item);
-      //cb();
-    //});
+    var items = [];
+    crawler.pipeline(function(item, cb){
+      items.push(item);
+      cb();
+    });
 
-    //crawler.once('finish', function(){
-      //var stats = crawler.stats;
-      //assert.equal(stats.pagesCrawled, 3);
-      //assert.equal(items.length, 3);
-      //done();
-    //});
+    crawler.once('finish', function(){
+      var stats = crawler.stats;
+      assert.equal(stats.pagesCrawled, 3);
+      assert.equal(items.length, 3);
+      done();
+    });
 
-    //crawler.crawl();
-  //})
+    crawler.crawl();
+  })
 
 })
 
