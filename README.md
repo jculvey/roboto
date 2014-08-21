@@ -278,12 +278,12 @@ var crawler = new roboto.Crawler({
   allowedDomains: [ 
     "example.com",          // subdomains like news.example.com are allowed
   ],
-  blacklist: [
+  blacklist: [              // Any url matching one of these patterns will be filtered
     /rss/,
     /privacy/,
     /accounts/,
   ],
-  whitelist: [
+  whitelist: [              // Any url NOT matching one of these patterns will be filtered 
     /foo/,
     /bar/,
   ],
