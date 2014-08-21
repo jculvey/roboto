@@ -71,7 +71,9 @@ fooCrawler.pipeline(function(item, callback) {
 fooCrawler.crawl();
 ```
 
-For more options, see the [Options Reference](#Options Reference)
+For more options, see the [Options Reference](#options-reference).
+
+Look [here for additional examples](https://github.com/jculvey/roboto/tree/master/examples).
 
 ## Pipelines
 
