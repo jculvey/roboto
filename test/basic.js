@@ -4,25 +4,25 @@ var Log = require('log');
 
 var fixtures = require('./fixtures');
 var mockserver = null;
-var basicCrawler = null;
+var crawler = null;
 
 process.env['NODE_ENV'] = 'test';
 
 describe('Happy Path', function(){
   before(function() {
     mockserver = require('./mockserver').createServer(9999);
-    basicCrawler = fixtures.storiesCrawler();
+    crawler = fixtures.storiesCrawler();
   });
 
   after(function() {
-    delete testCrawler;
+    delete crawler;
     mockserver.close();
   });
 
   it('should crawl things', function(done){
 
-    basicCrawler.once('finish', function(){
-      var stats = basicCrawler.stats;
+    crawler.once('finish', function(){
+      var stats = crawler.stats;
       assert.equal(stats.pagesCrawled, 3);
       assert.equal(stats.nofollowed, 1);
       assert.equal(stats.download.status200, 3);
@@ -31,17 +31,39 @@ describe('Happy Path', function(){
       assert.equal(stats.download.blacklisted, 1);
       done();
     });
-    basicCrawler.crawl();
+    crawler.crawl();
   })
 
   it('should crawl things again', function(done){
-    basicCrawler.once('finish', function(){
-      var stats = basicCrawler.stats;
+    crawler.once('finish', function(item){
+      var stats = crawler.stats;
       assert.equal(stats.pagesCrawled, 3);
       done()
     });
-    basicCrawler.crawl();
+    crawler.crawl();
   })
+
+  //it('should produce items', function(done){
+    //crawler.parseField('url', function(response) {
+      //return response.url;
+    //});
+
+    //var items = [];
+    //crawler.pipeline(function(item, cb){
+      //debugger;
+      //items.push(item);
+      //cb();
+    //});
+
+    //crawler.once('finish', function(){
+      //var stats = crawler.stats;
+      //assert.equal(stats.pagesCrawled, 3);
+      //assert.equal(items.length, 3);
+      //done();
+    //});
+
+    //crawler.crawl();
+  //})
 
 })
 
