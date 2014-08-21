@@ -1,6 +1,7 @@
 var roboto = require('../lib/roboto');
 var Log = require('log');
-var log = new Log('critical')
+var logLevel = process.env['LOG_LEVEL'] || 'critical';
+var log = new Log(logLevel)
 
 exports = module.exports = {};
 

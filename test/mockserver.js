@@ -8,7 +8,7 @@ var robots = require('robots.txt')
   //},req.param("timeout") || 0);
 //});
 
-exports.createServer = function createServer(port) {
+function createServer(port) {
   var app = express();
 
   app.use(robots(__dirname + '/static/robots.txt'))
@@ -17,6 +17,8 @@ exports.createServer = function createServer(port) {
   return app.listen(port);
 };
 
-//if (require.main === module) {
-  //app.listen(9090);
-//}
+exports.createServer = createServer;
+
+if (require.main === module) {
+  createServer(9090);
+}

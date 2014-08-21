@@ -15,7 +15,7 @@ var stripOptions = {
 
 process.env['NODE_ENV'] = 'test';
 
-describe('Parsing', function(){
+describe('Pipelines', function(){
   beforeEach(function() {
     mockserver = require('./mockserver').createServer(9999);
     crawler = fixtures.storiesCrawler();
@@ -31,7 +31,7 @@ describe('Parsing', function(){
     mockserver.close();
   });
 
-  it('should parse items', function(done){
+  it('should produce items', function(done){
     var items = [];
     crawler.pipeline(function(item, cb){
       items.push(item);
@@ -55,10 +55,10 @@ describe('Parsing', function(){
     crawler.crawl();
   })
 
-  it('should fail gracefully', function(done){
+  it('should fail gracefully items', function(done){
     var items = [];
 
-    crawler.parseField('body', function(response, $) {
+    crawler.pipeline(function(item, done) {
       throw new Error('bad stuff happened');
     });
 

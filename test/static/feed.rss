@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+  <title>Foo News</title>
+  <link>http://localhost:9999/stories/feed.rss</link>
+  <atom:link href="http://localhost:9999/stories/feed.rss" rel="self" type="application/rss+xml" />
+  <description>Features discussions of awesomeness.</description>
+
+  <item>
+    <title>Golfing for cats</title>
+    <description>The answers to everything.</description>
+    <link>http://localhost:9999/stories/page1.html</link>
+    <pubDate>Wed, 20 Aug 14 18:49:16 +0100</pubDate>
+    <guid>http://localhost:9999/stories/page1.html</guid>
+  </item>
+
+  </channel>
+</rss>
+
