@@ -23,22 +23,12 @@ var roboto = require('roboto');
 var html_strip = require('htmlstrip-native').html_strip;
 
 var fooCrawler = new roboto.Crawler({
-  start_urls: [
+  startUrls: [
     "http://www.foonews.com/latest",
   ],
-  allowed_domains: [ // optional
+  allowedDomains: [ // optional
     "foonews.com",
-  ],
-  blacklist: [ // optional
-    /rss/,
-    /privacy/,
-    /accounts/,
-  ],
-  whitelist: [ // optional
-    /foo/,
-    /bar/,
-  ],
-  requestDelay: 10 // delay between requests in ms, defaults to 0
+  ]
 });
 
 // Add parsers to the crawler.
@@ -80,6 +70,8 @@ fooCrawler.pipeline(function(item, callback) {
 
 fooCrawler.crawl();
 ```
+
+For more options, see the [Options Reference](#Options Reference)
 
 ## Pipelines
 
@@ -238,7 +230,7 @@ You can set the option `obeyRobotsTxt` to `false` in the constructor to disregar
 
 ```js
 var fooCrawler = new roboto.Crawler({
-  start_urls: [
+  startUrls: [
     "http://www.foonews.com/latest",
   ],
   obeyRobotsTxt: false
@@ -272,6 +264,37 @@ Also, pages will not be processed if the page's `<head>` contains a tag like:
 
 ```
 
+## Options Reference
+
+The only required option is `startUrls`.
+
+```html
+var crawler = new roboto.Crawler({
+  startUrls: [
+    "http://www.example.com",
+  ],
+  allowedDomains: [ 
+    "example.com",          // subdomains like news.example.com are allowed
+  ],
+  blacklist: [
+    /rss/,
+    /privacy/,
+    /accounts/,
+  ],
+  whitelist: [
+    /foo/,
+    /bar/,
+  ],
+  requestDelay: 10,         // delay between requests in ms, defaults to 0
+  obeyRobotsTxt: false,     // defaults to true
+  allowedContentTypes: [    // These are the defaults
+    'text/html',
+    'application/xhtml+xml',
+    'application/xml'
+  ]
+});
+```
+
 ## Logging
 
 Logging is handled by [log.js](https://github.com/visionmedia/log.js), which
@@ -282,7 +305,7 @@ in the options passed to the Crawler constructor.
 
 ```js
 var myCrawler = new roboto.Crawler({
-  start_urls: [ "http://www.mysite.com" ],
+  startUrls: [ "http://www.mysite.com" ],
   logLevel: 'debug'
 });
 

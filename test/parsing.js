@@ -47,8 +47,8 @@ describe('Parsing', function(){
 
     crawler.once('finish', function(){
       var stats = crawler.stats;
-      assert.equal(stats.pagesCrawled, 4);
-      assert.equal(items.length, 4);
+      assert.equal(stats.pagesCrawled, 3);
+      assert.equal(items.length, 3);
       done();
     });
 
