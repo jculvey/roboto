@@ -6,6 +6,8 @@ var fixtures = require('./fixtures');
 var mockserver = null;
 var basicCrawler = null;
 
+process.env['NODE_ENV'] = 'test';
+
 describe('Happy Path', function(){
   before(function() {
     mockserver = require('./mockserver').createServer(9999);

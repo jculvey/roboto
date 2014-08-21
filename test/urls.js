@@ -123,8 +123,9 @@ describe('Url Disallow', function(){
   });
 
   it('should obey allowed domains', function(){
-    var url = "http://www.example.com/good/foo.html";
-    assert(testCrawler._allowedUrl(url));
+    assert(testCrawler._allowedUrl("http://www.example.com/good/foo.html"));
+    assert(!testCrawler._allowedUrl("http://www.bad.com/good/foo.html"));
+    assert(testCrawler._allowedUrl("http://news.example.com/good/foo.html"));
   });
 
 })

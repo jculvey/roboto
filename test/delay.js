@@ -7,6 +7,8 @@ var fixtures = require('./fixtures');
 var mockserver = null;
 var testCrawler = null;
 
+process.env['NODE_ENV'] = 'test';
+
 describe('Request', function(){
   before(function() {
     mockserver = require('./mockserver').createServer(9999);
