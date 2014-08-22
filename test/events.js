@@ -23,7 +23,7 @@ describe('Happy Path', function(){
     var num404s = 0;
     crawler.on('httpError', function(statusCode, href, referer) {
       assert.equal(href, 'http://localhost:9999/stories/page3.html');
-      assert.equal(referer.href, 'http://localhost:9999/stories/page1.html');
+      assert.equal(referer, 'http://localhost:9999/stories/page1.html');
       if (statusCode === 404) {
         num404s += 1;
       }
