@@ -101,7 +101,6 @@ fooCrawler.pipeline(function(item, callback) {
 fooCrawler.pipeline(function(item, callback) {
   fs.writeFile(item.filename, item.body, function (err) {
     if (err) callback(err);
-    callback();
   });
 });
 
