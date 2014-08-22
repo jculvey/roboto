@@ -4,18 +4,25 @@ var roboto = require('../lib/roboto');
 var Log = require('log');
 
 var fixtures = require('./fixtures');
-var mockserver = null;
-var testCrawler = null;
+var mockserver;
+var crawler;
 
 process.env['NODE_ENV'] = 'test';
 
-describe('Request', function(){
+describe('Depth control', function(){
   before(function() {
     mockserver = require('./mockserver').createServer(9999);
-    testCrawler = fixtures.delayCrawler();
+    crawler = new roboto.Crawler({
+      requestDelay: 40,
+      allowedDomains: [ 'localhost' ],
+      startUrls: [
+        'http://localhost:9999/static/delay/index.html',
+      ]
+    });
+    crawler.log = fixtures.testLog();
   });
   after(function() {
-    delete testCrawler;
+    delete crawler;
     mockserver.close();
   });
 
@@ -24,7 +31,7 @@ describe('Request', function(){
     it('should wait for a user defined delay', function(done){
       var start = moment();
 
-      testCrawler.once('finish', function(){
+      crawler.once('finish', function(){
         var end = moment();
         var diff = end.diff(start);
         assert.equal(this.stats.pagesCrawled, 2);
@@ -32,7 +39,7 @@ describe('Request', function(){
         done();
       });
 
-      testCrawler.crawl();
+      crawler.crawl();
     });
   });
 
