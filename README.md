@@ -286,7 +286,7 @@ var crawler = new roboto.Crawler({
     /foo/,
     /bar/,
   ],
-  maxDepth: 10              // Crawled links deeper than this will be filtered. 
+  maxDepth: 10,             // Crawled links deeper than this will be filtered. 
   requestDelay: 10,         // delay between requests in ms, defaults to 0
   obeyRobotsTxt: false,     // defaults to true
   allowedContentTypes: [    // These are the defaults
