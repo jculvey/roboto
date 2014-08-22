@@ -277,16 +277,16 @@ var crawler = new roboto.Crawler({
   allowedDomains: [ 
     "example.com",          // subdomains like news.example.com are allowed
   ],
-  blacklist: [              // Any url matching one of these patterns will be filtered
+  blacklist: [              // matching urls will be filtered
     /rss/,
     /privacy/,
     /accounts/,
   ],
-  whitelist: [              // Any url NOT matching one of these patterns will be filtered 
+  whitelist: [              // urls must match one of these to be crawled
     /foo/,
     /bar/,
   ],
-  maxDepth: 10              // Crawled links deeper than this will be filtered. Not checked if unset.
+  maxDepth: 10              // Crawled links deeper than this will be filtered. 
   requestDelay: 10,         // delay between requests in ms, defaults to 0
   obeyRobotsTxt: false,     // defaults to true
   allowedContentTypes: [    // These are the defaults
