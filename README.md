@@ -269,7 +269,7 @@ Also, pages will not be processed if the page's `<head>` contains a tag like:
 
 The only required option is `startUrls`.
 
-```html
+```js
 var crawler = new roboto.Crawler({
   startUrls: [
     "http://www.example.com",
