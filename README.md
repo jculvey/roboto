@@ -351,7 +351,9 @@ full featured like Lucene and Solr.
 ## Roadmap
 
 Currently planned features:
-  - More pipelines (.csv, elastic-search, etc)
+  - Domain clumping avoidance.
+  - Pause and resume.
+  - More pipelines (.csv, elastic-search, mongo)
   - Built-in caching (alternative to a caching proxy like Squid).
   - Site map handling.
 
