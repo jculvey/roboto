@@ -61,6 +61,21 @@ describe('Robots Parser', function(){
     });
   })
 
+  it('should fail gracefull on a bad parse', function(done){
+    botParser._fetchRobotsFile = function(domain, done) {
+      fs.readFile(__dirname + '/static/badRobots.txt', 'utf8', function (err, data) {
+        done(200, data);
+      });
+    };
+
+    // All of the test urls should be filtered
+    botParser.allowed('http://localhost:9999/foo/bar.html', function(allowed) {
+      assert.equal(allowed, false);
+      done();
+    });
+  })
+
+
 })
 
 

@@ -13,7 +13,8 @@ Disallow: /foo/bar.html
 Allow: /folder/
 Disallow: /folder
 
-Disallow: /fish
+# Test no space between op and path
+Disallow:/fish
 Disallow: /fish/
 
 User-agent: roboto

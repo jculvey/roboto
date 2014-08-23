@@ -1,0 +1,5 @@
+User-agent:* 
+To Allow: *
+// javascript comments work right?
+Disallow: everything
+crwla-delay = 200
