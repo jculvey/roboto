@@ -230,10 +230,29 @@ By default roboto normalizes urls with the following procedure:
 Discarding query params all together isn't optimal. A planned enhancement is to
 sort query params, and possibly detect safe params to remove (sort, rows, etc.).
 
+## Link Extraction
+
+By default, roboto will extract all links from a page and add them
+onto the queue of pages to be crawled unless they:
+
+ - Don't contain an `href` attribute.
+ - Have `rel="nofollow"` or `rel="noindex"`.
+ - Don't belong to a domain listed in the crawler's `allowedDomains` list.
+ - Match a rule on the crawler's `blacklist`.
+ - Don't match a rule on the crawler's `whitelist`.
+ - Have already been crawled
+
+Also, pages will not be processed if the page's `<head>` contains a tag like:
+
+```html
+  <meta name="robots">nofollow</meta>
+
+```
+
 ## robots.txt
 
-By default, roboto will obey directives contained in a domain's `robots.txt` file. Directives
-are parsed [as outlined here](https://developers.google.com/webmasters/control-crawl-index/docs/robots_txt).
+In addition to the rules outlined above, roboto will also obey directives contained in a domain's `robots.txt` file. 
+Directives are parsed [as outlined here](https://developers.google.com/webmasters/control-crawl-index/docs/robots_txt).
 
 If the `robots.txt` file specifies a `Crawl-Delay` directive, that will be given precedence over the
 `requestDelay` option passed to the crawler constructor.
@@ -256,24 +275,6 @@ is then cached.
 Note that roboto will fetch the robots.txt of subdomains. For example, when crawling `http://news.ycombinator.com`,
 `http://news.ycombinator.com/robots.txt` will be fetched, not `http://ycombinator.com/robots.txt`.
 
-## Link Extraction
-
-By default, roboto will extract all links from a page and add them
-onto the queue of pages to be crawled unless they:
-
- - Don't contain an `href` attribute.
- - Have `rel="nofollow"` or `rel="noindex"`.
- - Don't belong to a domain listed in the crawler's `allowedDomains` list.
- - Match a rule on the crawler's `blacklist`.
- - Don't match a rule on the crawler's `whitelist`.
- - Have already been crawled
-
-Also, pages will not be processed if the page's `<head>` contains a tag like:
-
-```html
-  <meta name="robots">nofollow</meta>
-
-```
 
 ## Options Reference
 
