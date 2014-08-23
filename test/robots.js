@@ -4,8 +4,6 @@ var async = require('async');
 var roboto = require('../lib/roboto');
 var BotParser = require('../lib/robotsParser');
 
-process.env['NODE_ENV'] = 'test';
-
 // Mock the robots.txt fetch
 var botParser = new BotParser({ userAgent: 'roboto-test' });
 botParser._fetchRobotsFile = function(domain, done) {

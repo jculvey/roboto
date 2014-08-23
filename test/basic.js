@@ -1,12 +1,12 @@
+process.env.NODE_ENV = 'test';
+process.env.LOG_LEVEL = 'critical';
+
 var assert = require("assert");
 var roboto = require('../lib/roboto');
-var Log = require('log');
-
 var fixtures = require('./fixtures');
 var mockserver = null;
 var crawler = null;
 
-process.env['NODE_ENV'] = 'test';
 
 describe('Happy Path', function(){
   beforeEach(function() {

@@ -1,7 +1,6 @@
 var assert = require("assert");
 var roboto = require('../lib/roboto');
 var html_strip = require('htmlstrip-native').html_strip;
-var Log = require('log');
 
 var fixtures = require('./fixtures');
 var mockserver = null;
@@ -12,8 +11,6 @@ var stripOptions = {
   include_style : false,
   compact_whitespace : true
 };
-
-process.env['NODE_ENV'] = 'test';
 
 describe('Parsing', function(){
   beforeEach(function() {

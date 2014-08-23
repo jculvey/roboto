@@ -2,14 +2,10 @@ var assert = require("assert");
 var moment = require("moment");
 var roboto = require('../lib/roboto');
 var fixtures = require('./fixtures');
-
 var mockserver;
 var crawler;
 
-process.env['NODE_ENV'] = 'test';
-
 describe('Request', function(){
-
   before(function() {
     mockserver = require('./mockserver').createServer(9999);
     crawler = new roboto.Crawler({
@@ -19,7 +15,6 @@ describe('Request', function(){
       allowedDomains: [ 'localhost' ],
       maxDepth: 2
     });
-    crawler.log = fixtures.testLog();
   });
   after(function() {
     delete crawler;

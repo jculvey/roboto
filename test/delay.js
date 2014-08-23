@@ -1,13 +1,9 @@
 var assert = require("assert");
 var moment = require("moment");
 var roboto = require('../lib/roboto');
-var Log = require('log');
-
 var fixtures = require('./fixtures');
 var mockserver;
 var crawler;
-
-process.env['NODE_ENV'] = 'test';
 
 describe('Depth control', function(){
   before(function() {
@@ -19,7 +15,6 @@ describe('Depth control', function(){
         'http://localhost:9999/static/delay/index.html',
       ]
     });
-    crawler.log = fixtures.testLog();
   });
   after(function() {
     delete crawler;

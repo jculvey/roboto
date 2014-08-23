@@ -1,12 +1,8 @@
 var assert = require("assert");
 var roboto = require('../lib/roboto');
-var Log = require('log');
-
 var fixtures = require('./fixtures');
 var mockserver = null;
 var crawler = null;
-
-process.env['NODE_ENV'] = 'test';
 
 describe('Happy Path', function(){
   beforeEach(function() {
@@ -38,7 +34,3 @@ describe('Happy Path', function(){
   })
 
 })
-
-
-
-
