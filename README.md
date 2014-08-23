@@ -157,34 +157,11 @@ serve as a good reference point when developing your own pipeline.
 
 ## Downloaders
 
-The default downloader can be over-ridden with something custom. For example, you can
-use a custom downloader to:
-  - Cache requests to avoid repeat visits across crawl sessions.
-  - Use HTTP Authentication when making requests.
-
-You can use a custom downloader by adding one via the `crawler.downloader` function:
-
-```js
-
-myCrawler.downloader(function(href, requestHandler) {
-  var requestOptions = {
-    url: href,
-    headers: {
-        'X-foo': 'bar'
-    }
-  });
-
-  request(requestOptions, requestHandler);
-})
-```
-
-The signature of `requestHandler` should match that of the 
-[request callback](https://github.com/mikeal/request#requestoptions-callback)
-mentioned here.
+The default downloader can be over-ridden with a downloader plugin. 
 
 ### HTTP Authentication
 
-Roboto provides a built-in downloader for using http authentication in
+Roboto comes with a downloader plugin that using http authentication in
 your crawl requests.
 
 ```js
@@ -203,6 +180,32 @@ httpAuthOptions = {
 myCrawler.downloader(robotoHttpAuth(httpAuthOptions));
 
 ```
+
+### Create your own
+
+You can create a custom downloader and add it to your crawler `downloader` function. 
+
+```js
+var _ = require('underscore');
+
+var myDownloader = function(href, requestHandler) {
+  var requestOptions = _.extend(this.defaultRequestOptions, {
+    url: href
+    headers: {
+        'X-foo': 'bar'
+    }
+  });
+
+  request(requestOptions, requestHandler);
+};
+
+myCrawler.downloader(myDownloader) {
+```
+The default request options are available in the `defaultRequestOptions` property of the crawler. 
+
+More information about the structure of `requestOptions` and the signature of `requestHandler` can
+be [found here](https://github.com/mikeal/request#requestoptions-callback).
+
 
 ## Url Normalization
 
