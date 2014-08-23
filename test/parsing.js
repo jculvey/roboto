@@ -1,16 +1,9 @@
 var assert = require("assert");
 var roboto = require('../lib/roboto');
-var html_strip = require('htmlstrip-native').html_strip;
 
 var fixtures = require('./fixtures');
 var mockserver = null;
 var crawler = null;
-
-var stripOptions = {
-  include_script : false,
-  include_style : false,
-  compact_whitespace : true
-};
 
 describe('Parsing', function(){
   beforeEach(function() {
@@ -37,9 +30,7 @@ describe('Parsing', function(){
 
     crawler.parseField('body', function(response, $) {
       var html = $('body').html();
-      if (html) {
-        return html_strip(html, stripOptions);
-      }
+      return html;
     });
 
     crawler.once('finish', function(){
