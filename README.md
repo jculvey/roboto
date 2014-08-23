@@ -100,14 +100,11 @@ crawler.on('item', function(item) {
 
 ## Pipelines
 
-Pipelines are plugins that process items. Roboto provides some useful built-in pipelines.
+Pipelines are item processing plugins which you can add to a crawler like so:
 
-The signature of a pipeline function is `function(item, callback)`.  The `callback`
-function takes a single argument `err` which should be supplied if an error was encountered. Otherwise,
-it should be invoked with no arguments `callback()`.
-
-By default, roboto adds the [`itemLogger` pipeline](https://github.com/jculvey/roboto/blob/master/lib/pipelines/item-logger.js) to
-each crawler. This pipeline simply logs the contents of an item using roboto's built-in logger.
+```js
+crawler.pipeline(somePipeline);
+```
 
 ### roboto-solr
 
@@ -133,6 +130,30 @@ var robotoSolr = roboto.pipelines.robotoSolr({
 
 myCrawler.pipeline(robotoSolr);
 ```
+
+### Create your own.
+
+Creating your own pipeline plugin can make it easeir to share the same item processing
+logic across projects. It also lets you share it with others!
+
+
+The signature of a pipeline function is `function(item, callback)`.  The `callback`
+function takes a single argument `err` which should be supplied if an error was encountered. Otherwise,
+it should be invoked with no arguments `callback()`.
+
+```js
+var myPipeline = function(item, done) {
+  log.info(JSON.stringify(item, null, '  '));
+  done();
+};
+
+myCrawler.pipeline(myPipeline);
+```
+
+By default, roboto adds the [`itemLogger` pipeline](https://github.com/jculvey/roboto/blob/master/lib/pipelines/item-logger.js) to
+each crawler. This pipeline simply logs the contents of an item using roboto's built-in logger. This can
+serve as a good reference point when developing your own pipeline.
+
 
 ## Downloaders
 
