@@ -26,7 +26,7 @@ describe('Happy Path', function(){
       assert.equal(stats.nofollowed, 1);
       assert.equal(stats.download.status200, 3);
       assert.equal(stats.download.status404, 1);
-      assert.equal(stats.download.disallowedDomain, 2);
+      assert.equal(stats.download.disallowedDomain, 1);
       assert.equal(stats.download.blacklisted, 1);
       done();
     });
