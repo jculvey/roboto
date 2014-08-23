@@ -293,7 +293,8 @@ var crawler = new roboto.Crawler({
     'text/html',
     'application/xhtml+xml',
     'application/xml'
-  ]
+  ],
+  statsDumpInterval: 20     // The page rate at which stats are dumped.
 });
 ```
 

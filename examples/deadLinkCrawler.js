@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 // Normally, you import roboto like this:
 //var roboto = require('roboto');
-
 var roboto = require('../lib/roboto');
 var _ = require('underscore');
 
