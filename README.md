@@ -54,7 +54,7 @@ fooCrawler.parseField('url', function(response, $){
 });
 
 // Do something with the items you parse
-fooCrawler.pipeline(function(item, callback) {
+fooCrawler.on('item', function(item) {
   // item = { 
   //    title: 'Foo happened today!', 
   //    body: 'It was amazing', 
@@ -62,10 +62,7 @@ fooCrawler.pipeline(function(item, callback) {
   // }
 
   database.save(item, function(err) {
-    if(err) {
-      callback(err);
-    }
-    callback();
+    if (err) crawler.log(err);
   });
 
 });
@@ -77,46 +74,44 @@ For more options, see the [Options Reference](#options-reference).
 
 Look [here for additional examples](https://github.com/jculvey/roboto/tree/master/examples).
 
-## Pipelines
+## Items
 
 For each document roboto crawls, it creates an item. This item will be populated
 with fields parsed from the document with parser functions added via `crawler.parseField`.
 
-After a document has been parsed, a crawler's pipelines will be invoked in the order
-in which they were added.
-
-To do something more useful with your data, you'll want to use pipelines.
-
-Pipleines can be added to your crawler like this:
+After a document has been parsed, the crawler will emit an `item` event. You can subscribe to this event like
+so:
 
 ```js
-fooCrawler.pipeline(function(item, callback) {
+crawler.on('item', function(item) {
   database.save(item, function(err) {
-    if(err) {
-      callback(err);
-    }
-    callback();
+    if(err) crawler.log(err);
   });
 });
 
 // Probably not a wise idea, but for the purpose of illustration:
-fooCrawler.pipeline(function(item, callback) {
+crawler.on('item', function(item) {
   fs.writeFile(item.filename, item.body, function (err) {
-    if (err) callback(err);
+    if (err) crawler.log(err);
   });
 });
 
 ```
 
+## Pipelines
+
+Pipelines are plugins that process items. Roboto provides some useful built-in pipelines.
+
 The signature of a pipeline function is `function(item, callback)`.  The `callback`
 function takes a single argument `err` which should be supplied if an error was encountered. Otherwise,
 it should be invoked with no arguments `callback()`.
 
-Roboto provides some useful built-in pipelines.
+By default, roboto adds the [`itemLogger` pipeline](https://github.com/jculvey/roboto/blob/master/lib/pipelines/item-logger.js) to
+each crawler. This pipeline simply logs the contents of an item using roboto's built-in logger.
 
 ### roboto-solr
 
-This can be used to write extracted items to a solr index.
+This pipeline can be used to write extracted items to a solr index.
 
 A `fieldMap` can be specified in the options of the constructor to
 change the key of an item as it is stored in solr.
@@ -146,7 +141,7 @@ use a custom downloader to:
   - Cache requests to avoid repeat visits across crawl sessions.
   - Use HTTP Authentication when making requests.
 
-You can use a custom downloader by adding one via the `crawler.donwloader` function:
+You can use a custom downloader by adding one via the `crawler.downloader` function:
 
 ```js
 
@@ -211,16 +206,6 @@ By default roboto normalizes urls with the following procedure:
 Discarding query params all together isn't optimal. A planned enhancement is to
 sort query params, and possibly detect safe params to remove (sort, rows, etc.).
 
-Like many other aspects of roboto, the default normalization routine is easy to 
-over-ride.
-
-```js
-myCrawler.normalizeUrl = function(link, response) {
-  var normalizedUrl = specialNormalize(link);
-  return normalizedUrl;
-}
-```
-
 ## robots.txt
 
 By default, roboto will obey directives contained in a domain's `robots.txt` file. Directives
@@ -246,7 +231,6 @@ is then cached.
 
 Note that roboto will fetch the robots.txt of subdomains. For example, when crawling `http://news.ycombinator.com`,
 `http://news.ycombinator.com/robots.txt` will be fetched, not `http://ycombinator.com/robots.txt`.
-
 
 ## Link Extraction
 
