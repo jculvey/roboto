@@ -5,9 +5,9 @@ Roboto
 
 Roboto is a node.js crawler framework that you can use to do things like: 
   - Crawl documents in an intranet for search indexing.
-  - Scrape a website for data aggregation.
-  - Crawl an app to check for broken links.
-  - General purpose crawling of the web.
+  - Crawl an app to check for broken links [(example)](https://github.com/jculvey/roboto/blob/master/examples/deadLinkCrawler.js).
+  - General purpose crawling of the web [(news crawler example)](https://github.com/jculvey/roboto/blob/master/examples/top20news.js).
+  - Scrape a website for data aggregation [(hackernews example)](https://github.com/jculvey/roboto/blob/master/examples/hackerNews.js).
   - Much more!
 
 ## Installation
@@ -71,8 +71,6 @@ fooCrawler.crawl();
 ```
 
 For more options, see the [Options Reference](#options-reference).
-
-Look [here for additional examples](https://github.com/jculvey/roboto/tree/master/examples).
 
 ## Items
 
@@ -343,6 +341,14 @@ myCrawler.log.notice('Something noticeable happened.');
 myCrawler.log.info('Something happened.');
 myCrawler.log.debug('Something happened here.');
 ```
+
+## Examples
+
+Available [here](https://github.com/jculvey/roboto/tree/master/examples).
+
+  - [Crawl an app to check for broken links](https://github.com/jculvey/roboto/blob/master/examples/deadLinkCrawler.js).
+  - [Crawl the top 20 news sites according to Alexa)](https://github.com/jculvey/roboto/blob/master/examples/top20news.js).
+  - [Crawl Hacker News](https://github.com/jculvey/roboto/blob/master/examples/hackerNews.js).
 
 ## Alternatives
 
