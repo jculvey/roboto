@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 // Normally, you import roboto like this:
 //var roboto = require('roboto');
-
 var roboto = require('../lib/roboto');
-var html_strip = require('htmlstrip-native').html_strip;
 
+var html_strip = require('htmlstrip-native').html_strip;
 var stripOptions = {
   include_script : false,
   include_style : false,
