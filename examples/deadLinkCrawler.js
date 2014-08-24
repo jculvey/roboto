@@ -5,12 +5,11 @@ var roboto = require('../lib/roboto');
 var _ = require('underscore');
 
 var crawler = new roboto.Crawler({
-  allowedDomains: [
-    'example.com'
-  ],
   startUrls: [
     'http://example.com/docs/guide/'
   ]
+  // We don't want it crawling outside links.
+  constrainToRootDomains: true,
 });
 
 var deadLinks = [];

@@ -11,12 +11,14 @@ var stripOptions = {
 };
 
 var dmozCrawler = new roboto.Crawler({
-  allowedDomains: [
-    'dmoz.org'
-  ],
   startUrls: [
     'http://www.dmoz.org/',
   ],
+  allowedDomains: [
+    'dmoz.org'
+  ],
+  // Demonstrating blacklisting.
+  // Any url with /FAQ/ in it will be filtered.
   blacklist: [
     /FAQ/,
   ]
