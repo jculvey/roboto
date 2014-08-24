@@ -288,6 +288,7 @@ var crawler = new roboto.Crawler({
   allowedDomains: [ 
     "example.com",          // subdomains like news.example.com are allowed
   ],
+  constrainToRootDomains: true,  // defaults to false
   blacklist: [              // matching urls will be filtered
     /rss/,
     /privacy/,
@@ -308,6 +309,15 @@ var crawler = new roboto.Crawler({
   statsDumpInterval: 20     // The page rate at which stats are dumped.
 });
 ```
+
+`constrainToRootDomains` can be used instead of (or in addition to) `allowedDomains`.
+If this option is specified, roboto will automatically add the top level domain of
+each url in `startUrls` to the list of allowed domains. If you've written a crawler with
+many start urls, it can be easier to use this option than to explicitly list each allowed domain.
+
+If no `allowedDomains` have been specified, and `constrainToRootDomains` has been set to false, 
+roboto will crawl will add all links to the queue, regardless of domain. This can obviously result
+in very large crawls (a large portion of the internet if you pick the right startUrls).
 
 ## Logging
 
@@ -360,10 +370,4 @@ Currently planned features:
 
 Feel free to create an issue if there's a feature you'd like to see or a bug you
 want fixed :)
-
-
-
-
-
-
 
