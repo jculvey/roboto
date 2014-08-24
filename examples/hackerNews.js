@@ -37,4 +37,8 @@ crawler.parseField('body', function(response, $) {
   }
 });
 
+crawler.on('item', function(item) {
+  // Do something with the item!
+});
+
 crawler.crawl();

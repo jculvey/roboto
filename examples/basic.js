@@ -39,4 +39,8 @@ dmozCrawler.parseField('server', function(response, $) {
   return response.headers['server'] || '';
 });
 
+dmozCrawler.on('item', function(item) {
+  // Do something with the item!
+});
+
 dmozCrawler.crawl();

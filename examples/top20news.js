@@ -58,4 +58,8 @@ crawler.parseField('body', function(response, $) {
   return strippedHtml.substr(0, 160);
 });
 
+crawler.on('item', function(item) {
+  // Do something with the item!
+});
+
 crawler.crawl();
