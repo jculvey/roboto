@@ -16,7 +16,7 @@ Roboto is a node.js crawler framework that you can use to do things like:
   $ npm install roboto
 ```
 
-## Basic Usage 
+## Usage 
 
 Here's an example of roboto being used to crawl a fictitious news site:
 
