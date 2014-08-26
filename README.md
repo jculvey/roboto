@@ -100,14 +100,14 @@ If a `whitelist` has been specified, only urls matching a pattern in `whitelist`
 will be crawled.
 
 In the example crawler above, the following urls would get crawled:
-  - http://www.example.com/stories/foo-bar.html
-  - http://www.example.com/stories/1900-01-01/old-stories.html
-  - http://www.example.com/sports/football/people-kicking-balls.html
+  - `http://www.example.com/stories/foo-bar.html`
+  - `http://www.example.com/stories/1900-01-01/old-stories.html`
+  - `http://www.example.com/sports/football/people-kicking-balls.html`
 
 And the following urls would not:
-  - http://www.example.com/accounts/passwords.html  (match in `blacklist`)
-  - http://www.example.com/foo/bar/page.html        (no match `in whitelist`) 
-  - http://www.badnews.com/foo/bar/page.html        (not in `allowedDomains`) 
+  - `http://www.example.com/accounts/passwords.html`  (match in `blacklist`)
+  - `http://www.example.com/foo/bar/page.html`        (no match `in whitelist`) 
+  - `http://www.badnews.com/foo/bar/page.html`        (not in `allowedDomains`) 
 
 ## Items
 
