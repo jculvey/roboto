@@ -20,6 +20,7 @@ var linkExtractor = new LinkExtractor({
     'application/xml'
   ],
   allowedSchemes: [ 'http', 'https' ],
+  obeyNofollow: true
 }, Stats.defaultStats());
 
 describe('Url Normalization', function(){
@@ -134,6 +135,21 @@ describe('Url Disallow', function(){
     assert(linkExtractor._allowedUrl("http://www.example.com/good/foo.html"));
     assert(!linkExtractor._allowedUrl("http://www.bad.com/good/foo.html"));
     assert(linkExtractor._allowedUrl("http://news.example.com/good/foo.html"));
+  });
+
+  it('should obey nofollow', function(){
+    var linkFollow = $("<a href='http://www.example.com/foo/index.php'>");
+    var linkNofollow = $("<a href='http://www.example.com/foo/index.php' rel='nofollow'>");
+    assert.equal(linkExtractor._followable(linkFollow), true);
+    assert.equal(linkExtractor._followable(linkNofollow), false);
+  });
+
+  it('should not obey nofollow when obeyNofollow = false', function(){
+    var linkFollow = $("<a href='http://www.example.com/foo/index.php'>");    
+    var linkNofollow = $("<a href='http://www.example.com/foo/index.php' rel='nofollow'>");
+    linkExtractor.options.obeyNofollow = false;
+    assert.equal(linkExtractor._followable(linkFollow), true);
+    assert.equal(linkExtractor._followable(linkNofollow), true);
   });
 
 })
