@@ -61,9 +61,35 @@ describe('Happy Path', function(){
     });
 
     crawler.crawl();
-  })
+  });
 
-})
+  it('should produce items with urlPath param', function(done){
+    crawler.parseField('path', function(response) {
+      return response.urlPath;
+    });
+
+    var items = [];
+    crawler.pipeline(function(item, cb){
+      items.push(item);
+      cb();
+    });
+
+    crawler.once('finish', function(){
+      var stats = crawler.stats;
+      assert.equal(items.length, 3);
+      assert.notEqual(items[0], undefined);
+      assert.notEqual(items[1], undefined);
+      assert.notEqual(items[2], undefined);
+      assert.equal(items[0].path.length, 0);
+      assert.equal(items[1].path.length, 1);
+      assert.equal(items[2].path.length, 1);
+      done();
+    });
+
+    crawler.crawl();
+  });
+
+});
 
 
 
