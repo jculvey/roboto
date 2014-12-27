@@ -20,7 +20,8 @@ var linkExtractor = new LinkExtractor({
     'application/xml'
   ],
   allowedSchemes: [ 'http', 'https' ],
-  obeyNofollow: true
+  obeyNofollow: true,
+  allowQueryParams: false
 }, Stats.defaultStats());
 
 describe('Url Normalization', function(){
@@ -38,6 +39,14 @@ describe('Url Normalization', function(){
     var link = $("<a href='/stories/foo.html'>");
     var actual = linkExtractor.normalizeUrl(link, resp);
     var expected = "http://www.foonews.com/stories/foo.html";
+    assert.equal(actual, expected);
+  });
+
+  it('should not discard query params when allowQueryParams is true', function(){
+    var link = $("<a href='/stories/foo.html?id=345'>");
+    linkExtractor.options.allowQueryParams = true;
+    var actual = linkExtractor.normalizeUrl(link, resp);
+    var expected = "http://www.foonews.com/stories/foo.html?id=345";
     assert.equal(actual, expected);
   });
 
