@@ -7,7 +7,7 @@ var _ = require('underscore');
 var crawler = new roboto.Crawler({
   startUrls: [
     'http://example.com/docs/guide/'
-  ]
+  ],
   // We don't want it crawling outside links.
   constrainToRootDomains: true,
 });
