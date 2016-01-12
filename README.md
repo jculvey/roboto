@@ -1,8 +1,6 @@
 Roboto
 =======
 
-[![Build Status](https://travis-ci.org/jculvey/roboto.svg?branch=master)](https://travis-ci.org/jculvey/roboto)
-
 Roboto is a node.js crawler framework that you can use to do things like: 
   - Crawl documents in an intranet for search indexing.
   - Crawl an app to check for broken links [(example)](https://github.com/jculvey/roboto/blob/master/examples/deadLinkCrawler.js).
