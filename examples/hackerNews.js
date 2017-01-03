@@ -17,6 +17,8 @@ var crawler = new roboto.Crawler({
   allowedDomains: [
     "news.ycombinator.com",
   ],
+  //test for specific a hrefs
+  linkEx: 'span.yclinks a',
   // Note that there is a delay due to directive 'Crawl-Delay: 30'
   // defined in their robots.txt
   //obeyRobotsTxt: false
